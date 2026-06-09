@@ -1,0 +1,17 @@
+name: Release addon 
+on:
+  push:
+    tags:
+      - v*
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    uses: meta/workflows/.forgejo/workflows/wow-release.yml@master
+    runs-on: docker
+    secrets: inherit
+    with:
+      github: 'csmith/wow-whos-got-the-keys'
+      #wowinterface-addon-id: ''

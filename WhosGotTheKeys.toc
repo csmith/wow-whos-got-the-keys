@@ -1,0 +1,15 @@
+## Interface: 120005
+
+## Title: Who's Got The Keys
+## Notes: Shows which party members have a keystone for the current Mythic dungeon
+## Version: 1.0.0
+## DefaultState: Enabled
+## SavedVariables: WhosGotTheKeysDB
+
+libs\LibSharedMedia-3.0\LibStub\LibStub.lua
+libs\LibSharedMedia-3.0\lib.xml
+libs\LibEditMode\namespaced.lua
+libs\LibEditMode\embed.xml
+libs\LibKeystone\LibKeystone.lua
+
+WhosGotTheKeys.lua
