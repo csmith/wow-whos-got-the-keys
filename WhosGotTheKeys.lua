@@ -4,6 +4,8 @@ local LibEditMode = ns.LibEditMode
 local LSM = LibStub("LibSharedMedia-3.0")
 local LKS = LibStub("LibKeystone")
 
+local DEFAULT_FONT = GameFontNormal:GetFont()
+
 local frame = CreateFrame("Frame", ADDON .. "Frame", UIParent)
 frame:SetSize(300, 100)
 frame:SetFrameStrata("MEDIUM")
@@ -32,8 +34,6 @@ for i = 1, 5 do
     line:SetText("")
     playerLines[i] = line
 end
-
-local DEFAULT_FONT = GameFontNormal:GetFont()
 
 local function GetFontValues()
     local values = {}
@@ -213,6 +213,7 @@ local function OnEvent(self, event, ...)
         self:UnregisterEvent("CHALLENGE_MODE_START")
         self:UnregisterEvent("ENCOUNTER_START")
         self:UnregisterEvent("PLAYER_REGEN_DISABLED")
+        self:UnregisterEvent("PLAYER_REGEN_ENABLED")
         self:UnregisterEvent("UNIT_CONNECTION")
         frame:Hide()
     elseif event == "CHALLENGE_MODE_COMPLETED" then
