@@ -2,7 +2,7 @@
 
 ## Title: Who's Got The Keys
 ## Notes: Shows which party members have a keystone for the current Mythic dungeon
-## Version: 1.0.0
+## Version: 1.0.1
 ## DefaultState: Enabled
 ## SavedVariables: WhosGotTheKeysDB
 
