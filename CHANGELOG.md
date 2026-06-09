@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.2 - 2026-06-09
+
+- Set correct version in TOC...
+
 ## 1.0.1 - 2026-06-09
 
 - Fix font-related error on load
