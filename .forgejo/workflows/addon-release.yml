@@ -15,3 +15,4 @@ jobs:
     with:
       github: 'csmith/wow-whos-got-the-keys'
       wowinterface-addon-id: '27155'
+      curseforge-project-id: '1570393'
