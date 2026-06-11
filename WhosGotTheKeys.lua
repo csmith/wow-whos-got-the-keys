@@ -50,6 +50,7 @@ local defaultPosition = {
 }
 
 local currentInstanceID = nil
+local runActive = false
 local partyKeys = {}
 
 local function UpdateDisplay()
@@ -97,7 +98,7 @@ local function UpdateDisplay()
     end
     frame:SetHeight(height)
 
-    if #sorted > 0 then
+    if #sorted > 0 and not runActive then
         frame:Show()
     else
         frame:Hide()
@@ -206,10 +207,12 @@ local function OnEvent(self, event, ...)
                 LKS.Request("PARTY")
             else
                 currentInstanceID = nil
+                runActive = false
                 frame:Hide()
             end
         end)
     elseif event == "CHALLENGE_MODE_START" then
+        runActive = true
         self:UnregisterEvent("CHALLENGE_MODE_START")
         self:UnregisterEvent("ENCOUNTER_START")
         self:UnregisterEvent("PLAYER_REGEN_DISABLED")
@@ -217,6 +220,7 @@ local function OnEvent(self, event, ...)
         self:UnregisterEvent("UNIT_CONNECTION")
         frame:Hide()
     elseif event == "CHALLENGE_MODE_COMPLETED" then
+        runActive = false
         C_Timer.After(5, function()
             local _, _, diffID, _, _, _, _, instanceID = GetInstanceInfo()
             if diffID == 8 then
@@ -231,6 +235,7 @@ local function OnEvent(self, event, ...)
     elseif event == "ENCOUNTER_START" then
         frame:Hide()
     elseif event == "PLAYER_LEAVING_WORLD" then
+        runActive = false
         self:UnregisterEvent("CHALLENGE_MODE_START")
         self:UnregisterEvent("CHALLENGE_MODE_COMPLETED")
         self:UnregisterEvent("ENCOUNTER_START")

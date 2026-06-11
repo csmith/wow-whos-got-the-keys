@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.3 - 2026-06-11
+
+- More aggressively fix frame being visible during a dungeon run
+
 ## 1.0.2 - 2026-06-09
 
 - Set correct version in TOC...
