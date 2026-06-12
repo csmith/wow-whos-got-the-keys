@@ -43,6 +43,8 @@ local function GetFontValues()
     return values
 end
 
+local DEFAULT_LINE_SIZE = 14
+
 local defaultPosition = {
     point = "TOP",
     x = 0,
@@ -113,15 +115,17 @@ local function GetDB(layoutName)
             x = defaultPosition.x,
             y = defaultPosition.y,
             font = DEFAULT_FONT,
+            fontSize = DEFAULT_LINE_SIZE,
         }
     end
     return WhosGotTheKeysDB[layoutName]
 end
 
-local function ApplyFont(fontPath)
-    header:SetFont(fontPath, 16, "OUTLINE")
+local function ApplyFont(fontPath, fontSize)
+    local size = fontSize or DEFAULT_LINE_SIZE
+    header:SetFont(fontPath, size + 2, "OUTLINE")
     for i = 1, 5 do
-        playerLines[i]:SetFont(fontPath, 14, "OUTLINE")
+        playerLines[i]:SetFont(fontPath, size, "OUTLINE")
     end
 end
 
@@ -156,7 +160,7 @@ LibEditMode:RegisterCallback('layout', function(layoutName)
     local db = GetDB(layoutName)
     frame:ClearAllPoints()
     frame:SetPoint(db.point, db.x, db.y)
-    ApplyFont(db.font)
+    ApplyFont(db.font, db.fontSize)
 end)
 
 LibEditMode:AddFrame(frame, onPositionChanged, defaultPosition, "Who's Got The Keys")
@@ -170,11 +174,28 @@ LibEditMode:AddFrameSettings(frame, {
             return GetDB(layoutName).font
         end,
         set = function(layoutName, value)
-            GetDB(layoutName).font = value
-            ApplyFont(value)
+            local db = GetDB(layoutName)
+            db.font = value
+            ApplyFont(value, db.fontSize)
         end,
         values = GetFontValues,
         height = 300,
+    },
+    {
+        name = 'Font Size',
+        kind = LibEditMode.SettingType.Slider,
+        default = DEFAULT_LINE_SIZE,
+        minValue = 8,
+        maxValue = 32,
+        valueStep = 1,
+        get = function(layoutName)
+            return GetDB(layoutName).fontSize
+        end,
+        set = function(layoutName, value)
+            local db = GetDB(layoutName)
+            db.fontSize = value
+            ApplyFont(db.font, value)
+        end,
     },
 })
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.0 - 2026-06-12
+
+- Add option to set font size (accessible via edit mode)
+
 ## 1.0.3 - 2026-06-11
 
 - More aggressively fix frame being visible during a dungeon run
